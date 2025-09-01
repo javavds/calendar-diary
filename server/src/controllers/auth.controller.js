@@ -9,3 +9,17 @@ exports.login = async (req, res, next) => {
         next(err);
     }
 };
+
+exports.register = async (req, res, next) => {
+    try {
+        const { email, password, name } = req.body;
+        if (!email || !password || !name) {
+            return res.status(400).json({ error: 'email, password, name을 필수로 입력해주세요' });
+        }
+
+        const user = await authService.register(email, password, name);
+        res.status(201).json({ message: '회원가입 성공', user });
+    } catch (err) {
+        next(err);
+    }
+};
