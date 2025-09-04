@@ -12,35 +12,38 @@ exports.findByDate = async (userId, date) => {
 };
 
 // 일기 저장 (새로 생성하거나 수정)
-exports.saveDiary = async (userId, date, content, title = '') => {
-  const existing = await this.findByDate(userId, date);
+exports.saveDiary = async (userId, date, title = '', content = '', mood = null) => {
+  const existing = await exports.findByDate(userId, date);
 
   const conn = await connectDB();
+  try {
   if (existing) {
     await conn.query(
-      'UPDATE diaries SET content = ?, title = ? WHERE user_id = ? AND d = ?',
-      [content, title || existing.title, userId, date]
+      'UPDATE diaries SET title = ?, content = ?, mood = ? WHERE user_id = ? AND d = ?',
+      [title || existing.title, content, mood, userId, date]
     );
-    await conn.end();
     return {
       user_id: userId,
       d: date,
-      content,
       title: title || existing.title,
+      content,
       updated: true
     };
   } else {
     await conn.query(
       'INSERT INTO diaries (user_id, d, title, content, mood) VALUES (?, ?, ?, ?, ?)',
-      [userId, date, title, content, null]
+      [userId, date, title, content, mood]
     );
-    await conn.end();
     return {
       user_id: userId,
       d: date,
-      content,
       title,
+      content,
+      mood,
       created: true
     };
+    }
+  } finally {
+    await conn.end();
   }
 };
