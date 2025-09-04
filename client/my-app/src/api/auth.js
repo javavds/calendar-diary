@@ -1,11 +1,3 @@
-// POST
-// /auth/login
-// 로그인
-
-// POST
-// /auth/logout
-// 로그아웃
-
-// POST
-// /auth/register
-// 회원가입
+import http from './http';
+export const login = (body) => http.post('/auth/login', body); // {email,password}
+export const register = (body) => http.post('/auth/register', body); // {name,email,password}
