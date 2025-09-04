@@ -1,5 +1,7 @@
 const authService = require('../services/auth.service');
 
+
+// 로그인
 exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -10,6 +12,7 @@ exports.login = async (req, res, next) => {
     }
 };
 
+// 회원가입
 exports.register = async (req, res, next) => {
     try {
         const { email, password, name } = req.body;
@@ -23,3 +26,5 @@ exports.register = async (req, res, next) => {
         next(err);
     }
 };
+
+
