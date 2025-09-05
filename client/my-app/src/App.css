@@ -1,103 +1,165 @@
-/* src/App.css */
+/* src/App.css — 라이트 테마 */
+
+:root {
+    --bg: #f8fafc; /* 전체 배경 (아주 연한 회색-블루) */
+    --fg: #1f2937; /* 본문 글자 (짙은 회색) */
+    --muted: #6b7280; /* 보조 텍스트 */
+    --card: #ffffff; /* 카드 배경 */
+    --card-border: #e5e7eb; /* 카드 테두리 */
+    --input-bg: #ffffff; /* 입력 배경 */
+    --input-border: #d1d5db; /* 입력 테두리 */
+    --primary: #2563eb; /* 버튼 기본 파랑 */
+    --primary-hover: #1d4ed8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
 body {
     margin: 0;
-    background: #0f172a;
-    color: #e5e7eb;
+    background: linear-gradient(180deg, #fdfefe 0%, #f3f6fb 100%);
+    color: var(--fg);
     font-family: system-ui, Segoe UI, Roboto, Apple SD Gothic Neo, sans-serif;
 }
 
+/* 링크 */
 a {
-    color: #60a5fa;
+    color: var(--primary);
+}
+a:hover {
+    text-decoration: underline;
 }
 
+/* 공통 카드 */
 .card {
-    max-width: 720px;
+    max-width: 800px;
     margin: 48px auto;
-    padding: 20px;
-    border: 1px solid #1f2937;
-    border-radius: 14px;
-    background: #111827;
+    padding: 24px 28px;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    background: var(--card);
+    box-shadow: 0 8px 30px rgba(17, 24, 39, 0.06);
+}
+
+/* 폼 요소 */
+.card label {
+    display: block;
+    font-weight: 600;
+    margin-top: 12px;
+    margin-bottom: 6px;
 }
 
 .card input,
 .card textarea,
 .card select {
     width: 100%;
-    padding: 10px;
-    margin: 6px 0;
-    border: 1px solid #374151;
-    border-radius: 10px;
-    background: #0b1220;
-    color: #e5e7eb;
+    padding: 12px 14px;
+    margin: 6px 0 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 12px;
+    background: var(--input-bg);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.card button {
-    padding: 10px 14px;
+.card input:focus,
+.card textarea:focus,
+.card select:focus {
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+.card textarea {
+    line-height: 1.5;
+}
+
+/* 버튼 */
+.card button,
+.home .actions button,
+.modal button {
+    padding: 10px 16px;
     margin-top: 12px;
     border: 0;
-    border-radius: 10px;
-    background: #3b82f6;
+    border-radius: 12px;
+    background: var(--primary);
     color: white;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    transition: transform 0.05s ease, background 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
 }
 
+.card button:hover,
+.home .actions button:hover,
+.modal button:hover {
+    background: var(--primary-hover);
+}
+
+.card button:active,
+.home .actions button:active,
+.modal button:active {
+    transform: translateY(1px);
+}
+
+/* 보조 텍스트 */
 .muted {
-    color: #9ca3af;
+    color: var(--muted);
     margin: 6px 0 12px;
 }
 
-/* 홈 페이지 스타일 */
+/* 홈 페이지 */
 .home {
-    max-width: 720px;
+    max-width: 880px;
     margin: 80px auto;
-    padding: 32px;
+    padding: 0 20px;
     text-align: center;
 }
 
 .home h1 {
-    font-size: 32px;
-    margin-bottom: 8px;
+    font-size: 36px;
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
 }
 
 .home .subtitle {
-    color: #9ca3af;
-    margin-bottom: 24px;
+    color: var(--muted);
+    margin-bottom: 28px;
 }
 
 .home input[type='date'] {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #374151;
-    background: #0b1220;
-    color: #e5e7eb;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--fg);
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.home input[type='date']:focus {
+    border-color: #93c5fd;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
 .home .actions {
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
-.home .actions button {
-    padding: 10px 16px;
-    border: 0;
-    border-radius: 8px;
-    background: #3b82f6;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-/* 모달 스타일 */
+/* 모달 */
 .modal-backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+    inset: 0;
+    background: rgba(15, 23, 42, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,23 +167,42 @@ a {
 }
 
 .modal {
-    background: #111827;
+    background: var(--card);
     padding: 24px;
-    border-radius: 12px;
-    max-width: 400px;
+    border-radius: 14px;
+    max-width: 420px;
+    width: calc(100% - 32px);
+    border: 1px solid var(--card-border);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.12);
     text-align: center;
 }
 
 .modal p {
     margin-bottom: 16px;
+    color: var(--fg);
 }
 
-.modal button {
-    padding: 8px 12px;
-    margin: 0 8px;
+/* 작은 헤더/구분선 */
+.section-title {
+    margin: 8px 0 10px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+hr.soft {
     border: 0;
-    border-radius: 8px;
-    background: #3b82f6;
-    color: white;
-    font-weight: 500;
+    height: 1px;
+    background: var(--card-border);
+    margin: 14px 0;
+}
+
+/* pre(일기 내용)도 밝게 */
+pre {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 12px 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.6;
 }

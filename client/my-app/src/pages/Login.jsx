@@ -8,9 +8,13 @@ export default function Login() {
 
     const submit = async (e) => {
         e.preventDefault();
-        const { data } = await login(f); // { token }
-        localStorage.setItem('token', data.token);
-        nav('/calendar');
+        try {
+            const { data } = await login(f); // { token }
+            localStorage.setItem('token', data.token);
+            nav('/calendar'); // 로그인 후 캘린더로
+        } catch (e) {
+            alert(e?.response?.data?.message || '로그인 실패');
+        }
     };
 
     return (

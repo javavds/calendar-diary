@@ -1,5 +1,15 @@
-// 요청의 입력값 검증
-// 실패시 400 Bad Request와 필드별 에러 메세지 반환
-// 스키마 대로 타입/필수값/형식 체크
-// 컨트롤러가 검증 통과한 깨끗한 데이터만 처리
-// 입력검증할때
+const jwt = require('jsonwebtoken');
+
+exports.validateToken = (req, res, next) => {
+    const auth = req.headers.authorization || '';
+    const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+    if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        req.user = { id: decoded.id };
+        next();
+    } catch (e) {
+        return res.status(401).json({ message: 'Invalid token' });
+    }
+};

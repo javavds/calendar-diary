@@ -1,7 +1,7 @@
-// src/App.js
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
-import Home from './pages/Home'; // 추가
+import Home from './pages/Home';
+import Calendar from './pages/Calendar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DiaryView from './pages/DiaryView';
@@ -13,6 +13,14 @@ export default function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route
+                    path="/calendar"
+                    element={
+                        <ProtectedRoute>
+                            <Calendar />
+                        </ProtectedRoute>
+                    }
+                />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route
@@ -31,7 +39,6 @@ export default function App() {
                         </ProtectedRoute>
                     }
                 />
-                {/* 없는 경로 처리 */}
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
         </BrowserRouter>

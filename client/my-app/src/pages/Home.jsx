@@ -1,28 +1,19 @@
-// src/pages/Home.jsx
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Home() {
-    const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+    const [date, setDate] = useState(() => {
+        const d = new Date();
+        const off = d.getTimezoneOffset();
+        const local = new Date(d.getTime() - off * 60000);
+        return local.toISOString().slice(0, 10);
+    });
     const [showPrompt, setShowPrompt] = useState(false);
     const navigate = useNavigate();
     const isLoggedIn = !!localStorage.getItem('token');
 
-    const gotoView = () => {
-        if (!isLoggedIn) {
-            setShowPrompt(true);
-        } else {
-            navigate(`/diary/${date}`);
-        }
-    };
-
-    const gotoWrite = () => {
-        if (!isLoggedIn) {
-            setShowPrompt(true);
-        } else {
-            navigate(`/diary/${date}/edit`);
-        }
-    };
+    const gotoView = () => (isLoggedIn ? navigate(`/diary/${date}`) : setShowPrompt(true));
+    const gotoWrite = () => (isLoggedIn ? navigate(`/diary/${date}/edit`) : setShowPrompt(true));
 
     return (
         <div className="home">
@@ -36,7 +27,6 @@ export default function Home() {
                 <button onClick={gotoWrite}>일기 쓰기</button>
             </div>
 
-            {/* 로그인 안내 모달 */}
             {showPrompt && (
                 <div className="modal-backdrop">
                     <div className="modal">

@@ -8,8 +8,12 @@ export default function Register() {
 
     const submit = async (e) => {
         e.preventDefault();
-        await register(f);
-        nav('/login');
+        try {
+            await register(f);
+            nav('/login');
+        } catch (e) {
+            alert(e?.response?.data?.message || '회원가입 실패');
+        }
     };
 
     return (

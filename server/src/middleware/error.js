@@ -1,3 +1,4 @@
-// 모든 에러를 한곳에서 받아 응답 포맷 통일
-// 서비스/DB/검증에서 던진 에러를 잡아 상태코드/메세지매핑
-// DB 오류/ 권한오류/ 검증오류
+module.exports = (err, req, res, next) => {
+    console.error('[ERROR]', err);
+    res.status(500).json({ message: err.message || 'Internal Server Error' });
+};
