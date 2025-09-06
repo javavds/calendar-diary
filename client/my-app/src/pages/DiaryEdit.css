@@ -1,0 +1,149 @@
+:root{
+  --ink:#4b3d4a;
+  --pink:#ffd6ea;
+  --gold:#caa45e;
+  --pink-2:#fac2dd;
+}
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{margin:0; color:var(--ink); font-family:"Noto Sans KR", system-ui, sans-serif;}
+
+.edit-landing{
+  min-height:100dvh;
+  display:grid; place-items:center;
+  background:linear-gradient(160deg, #fff7fb, #f5f7ff);
+  position:relative; overflow:hidden; padding:24px;
+}
+
+/* 양피지 배경 */
+.parchment-bg{
+  position:absolute; z-index:0;
+  width:min(920px, 95vw); height:min(88vh, 880px);
+  background:center/cover no-repeat;
+  border-radius:28px;
+  box-shadow:0 24px 70px rgba(202,158,197,.28);
+  border:6px double #ffe0ee;
+}
+
+/* 만년필 */
+.deco-pen{
+  position:absolute; z-index:1;
+  right:4%; bottom:2%;
+  width:min(300px, 38vw);
+  transform: rotate(10deg);
+  filter: drop-shadow(0 18px 34px rgba(202,164,110,.28));
+  pointer-events:none;
+}
+
+/* 카드 (투명) */
+.edit-card{
+  position:relative; z-index:2;
+  width:min(860px, 92vw);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding:22px 18px 18px;
+}
+
+.edit-head{
+  display:flex; justify-content:space-between; align-items:center;
+  border-bottom:2px dashed #ffd6ea; padding-bottom:12px;
+}
+.edit-title{
+  margin:0; font-weight:900; font-size:22px;
+  background:linear-gradient(90deg, var(--pink), var(--pink-2));
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.wx-pill{
+  font-size:13px; font-weight:800; color:#6f5b6f;
+  padding:6px 10px; border-radius:999px;
+  background:rgba(255,255,255,0.5);
+  border:2px solid #ffd6ea;
+}
+
+/* 폼 */
+.edit-form{ margin-top:12px; display:grid; gap:12px; }
+.field{ display:grid; gap:6px; }
+.label{ font-size:13px; font-weight:900; color:#7b657b; }
+
+input,select,textarea{
+  width:100%; padding:12px; font-size:15px; color:var(--ink);
+  border:2px solid #ffd6ea; border-radius:14px;
+  outline:none;
+  background: rgba(255,255,255,0.5);  /* 반투명 */
+  backdrop-filter: blur(2px);
+}
+input:focus,select:focus,textarea:focus{
+  border-color:#ffb3d5; box-shadow:0 0 0 4px #ffeaf4;
+}
+textarea{ resize:vertical; line-height:1.5; }
+
+/* 버튼 행: 무조건 한 줄 */
+/* 버튼 컨테이너 */
+.actions{
+  display: flex;
+  flex-direction: row;     /* 가로 방향 */
+  justify-content: center; /* 가운데 정렬 */
+  align-items: center;
+  gap: 20px;               /* 버튼 사이 간격 */
+  margin-top: 16px;
+  flex-wrap: nowrap;       /* 줄바꿈 금지 */
+}
+
+/* 버튼 */
+.actions button{
+  display: inline-block;   /* 인라인 블록으로 */
+  padding: 10px 18px;
+  font-weight: 900;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;     /* 줄바꿈 방지 */
+  border: none;
+}
+
+.btn-primary{
+  background: linear-gradient(180deg, #ffe0ef, #ffd1e9);
+  border: 2px solid #ffc6e4;
+}
+.btn-ghost{
+  background: rgba(255,255,255,0.5);
+  border: 2px dashed #ffd6ea;
+}
+.btn-logout{
+  background: linear-gradient(180deg, #fff2f2, #ffdede);
+  border: 2px solid #ffbaba;
+  color: #b13b3b;
+}
+
+/* ==== FORCE HORIZONTAL ACTIONS (override) ==== */
+.edit-card .actions{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-wrap: nowrap !important;     /* 절대 줄바꿈 금지 */
+}
+
+/* 버튼이 가로로만 배치되도록 폭/표시 초기화 */
+.edit-card .actions > button{
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: 0 0 auto !important;        /* flex로 늘어나지 않게 */
+  white-space: nowrap !important;   /* 텍스트 줄바꿈 방지 */
+  padding: 10px 18px !important;
+}
+
+/* 혹시 다른 전역 스타일이 폭을 먹고 있다면 여기서 제거 */
+.btn-primary, .btn-ghost, .btn-logout{
+  width: auto !important;
+  /* 만약 이전에 flex:1 같은 게 있었다면 무력화 */
+  flex: 0 0 auto !important;
+}
+
+

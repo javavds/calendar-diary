@@ -1,0 +1,129 @@
+/* 접근성용 스크린리더 전용 텍스트 */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
+/* 전체 배경 */
+.landing {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(1200px 600px at 10% 15%, #fff3f8 0%, transparent 60%),
+    radial-gradient(1000px 500px at 90% 85%, #f3f6ff 0%, transparent 60%),
+    linear-gradient(160deg, #fff7fb, #f4f7ff);
+  padding: 24px;
+}
+
+/* 표지 컨테이너 */
+.cover {
+  position: relative;
+  width: min(720px, 92vw);
+  aspect-ratio: 3 / 4; /* 세로형 책 */
+  display: grid;
+  place-items: center;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(201, 158, 197, 0.25);
+  outline: 0;
+}
+
+/* 북커버 이미지 */
+.cover__image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+  filter: saturate(1.02) contrast(1.02);
+}
+
+/* 빛나는 금박 효과 (살짝) */
+.gilded-glow {
+  position: absolute; inset: 0;
+  background: radial-gradient(600px 300px at 70% 40%, rgba(255, 226, 170, 0.20), transparent 60%),
+              radial-gradient(400px 220px at 30% 70%, rgba(255, 209, 231, 0.16), transparent 60%);
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* 메뉴 토글(모바일/키보드용) */
+.cover__toggle {
+  position: absolute;
+  top: 12px; right: 12px;
+  background: rgba(255,255,255,0.75);
+  border: 2px solid #ffe0ee;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+}
+.cover__toggle:hover { background: #fff; }
+
+/* 액션 메뉴 */
+.cover__menu {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  gap: 14px;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity .25s ease, transform .25s ease, visibility .25s;
+}
+
+.cover:hover .cover__menu,
+.cover:focus-within .cover__menu,
+.cover.cover--open .cover__menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* 반투명 유리 패널 위에 주문 버튼들 */
+.spell {
+  width: min(440px, 86vw);
+  background: linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,255,255,.78));
+  border: 2px solid #ffd6ea;
+  border-radius: 16px;
+  padding: 14px 16px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 700;
+  color: #5b4a57;
+  box-shadow: 0 14px 30px rgba(255, 163, 208, .25);
+  backdrop-filter: blur(8px);
+  transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.spell strong { font-weight: 900; }
+
+.spell:hover {
+  transform: translateY(-1px);
+  border-color: #ffc3e2;
+  box-shadow: 0 18px 38px rgba(255, 140, 193, .32);
+}
+
+.spell:active { transform: translateY(0); }
+
+/* 보조 설명 */
+.spell__hint {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #8a768a;
+}
+
+/* 버튼별 살짝 다른 포커스/아우라 */
+.spell--login { outline: none; }
+.spell--signup { outline: none; }
+
+/* 작은 화면 정렬 */
+@media (max-width: 560px){
+  .spell { width: min(500px, 94vw); }
+}
